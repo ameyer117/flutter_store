@@ -5,19 +5,18 @@ import 'product_list_tab.dart';
 import 'search_tab.dart';
 import 'shopping_cart_tab.dart';
 
-
 class CupertinoStoreApp extends StatelessWidget {
   const CupertinoStoreApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // Only vertical is supported
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
     return const CupertinoApp(
-      theme: CupertinoThemeData(brightness: Brightness.light),
-      home: CupertinoStoreHomePage()
-    );
+        theme: CupertinoThemeData(brightness: Brightness.light),
+        home: CupertinoStoreHomePage());
   }
 }
 
@@ -27,15 +26,24 @@ class CupertinoStoreHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
-      tabBar: CupertinoTabBar(items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), label: "Products",),
-        BottomNavigationBarItem(icon: Icon(CupertinoIcons.search), label: "Search",),
-        BottomNavigationBarItem(icon: Icon(CupertinoIcons.shopping_cart), label: "Card"),
-      ],),
+      tabBar: CupertinoTabBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.home),
+            label: "Products",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.search),
+            label: "Search",
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.shopping_cart), label: "Card"),
+        ],
+      ),
       tabBuilder: (context, index) {
         late final CupertinoTabView returnValue;
 
-        switch(index) {
+        switch (index) {
           case 0:
             returnValue = CupertinoTabView(builder: (context) {
               return const CupertinoPageScaffold(child: ProductListTab());
@@ -53,7 +61,7 @@ class CupertinoStoreHomePage extends StatelessWidget {
             break;
         }
 
-        return returnValue
+        return returnValue;
       },
     );
   }
