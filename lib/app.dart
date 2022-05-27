@@ -38,7 +38,7 @@ class CupertinoStoreHomePage extends StatelessWidget {
             label: "Search",
           ),
           BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.shopping_cart), label: "Card"),
+              icon: Icon(CupertinoIcons.shopping_cart), label: "Cart"),
         ],
       ),
       tabBuilder: (context, index) {

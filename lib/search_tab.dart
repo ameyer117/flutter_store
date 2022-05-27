@@ -62,13 +62,16 @@ class _SearchTabState extends State<SearchTab> {
           children: [
             _buildSearchBox(),
             Expanded(
-              child: ListView.builder(
-                itemCount: results.length,
-                itemBuilder: ((context, index) {
-                  return ProductRowItem(
-                      product: results[index],
-                      lastItem: index == results.length - 1);
-                }),
+              child: Container(
+                color: CupertinoColors.white,
+                child: ListView.builder(
+                  itemCount: results.length,
+                  itemBuilder: ((context, index) {
+                    return ProductRowItem(
+                        product: results[index],
+                        lastItem: index == results.length - 1);
+                  }),
+                ),
               ),
             )
           ],

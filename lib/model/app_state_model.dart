@@ -7,19 +7,23 @@ double _salesTaxRate = 0.06;
 double _shippingCostPerItem = 7;
 
 class AppStateModel extends foundation.ChangeNotifier {
+  // All the available products.
   List<Product> _availableProducts = [];
 
+  // The currently selected category of products.
   Category _selectedCategory = Category.all;
 
+  // The IDs and quantities of products currently in the cart.
   final _productsInCart = <int, int>{};
 
   Map<int, int> get productsInCart {
     return Map.from(_productsInCart);
   }
 
+  // Total number of items in the cart.
   int get totalCartQuantity {
-    return _productsInCart.values.fold(0, (previousValue, value) {
-      return previousValue + value;
+    return _productsInCart.values.fold(0, (accumulator, value) {
+      return accumulator + value;
     });
   }
 
@@ -27,12 +31,17 @@ class AppStateModel extends foundation.ChangeNotifier {
     return _selectedCategory;
   }
 
+  // Totaled prices of the items in the cart.
   double get subtotalCost {
-    return _productsInCart.keys.map((e) {
-      return getProductById(e).price & _productsInCart[e]!;
-    }).fold(0, (previousValue, element) => previousValue + element);
+    return _productsInCart.keys.map((id) {
+      // Extended price for product line
+      return getProductById(id).price * _productsInCart[id]!;
+    }).fold(0, (accumulator, extendedPrice) {
+      return accumulator + extendedPrice;
+    });
   }
 
+  // Total shipping cost for the items in the cart.
   double get shippingCost {
     return _shippingCostPerItem *
         _productsInCart.values.fold(0.0, (accumulator, itemCount) {
@@ -40,14 +49,17 @@ class AppStateModel extends foundation.ChangeNotifier {
         });
   }
 
+  // Sales tax for the items in the cart
   double get tax {
     return subtotalCost * _salesTaxRate;
   }
 
+  // Total cost to order everything in the cart.
   double get totalCost {
     return subtotalCost + shippingCost + tax;
   }
 
+  // Returns a copy of the list of available products, filtered by category.
   List<Product> getProducts() {
     if (_selectedCategory == Category.all) {
       return List.from(_availableProducts);
@@ -58,12 +70,14 @@ class AppStateModel extends foundation.ChangeNotifier {
     }
   }
 
+  // Search the product catalog
   List<Product> search(String searchTerms) {
     return getProducts().where((product) {
       return product.name.toLowerCase().contains(searchTerms.toLowerCase());
     }).toList();
   }
 
+  // Adds a product to the cart.
   void addProductToCart(int productId) {
     if (!_productsInCart.containsKey(productId)) {
       _productsInCart[productId] = 1;
@@ -74,6 +88,7 @@ class AppStateModel extends foundation.ChangeNotifier {
     notifyListeners();
   }
 
+  // Removes an item from the cart.
   void removeItemFromCart(int productId) {
     if (_productsInCart.containsKey(productId)) {
       if (_productsInCart[productId] == 1) {
@@ -86,15 +101,18 @@ class AppStateModel extends foundation.ChangeNotifier {
     notifyListeners();
   }
 
+  // Returns the Product instance matching the provided id.
   Product getProductById(int id) {
     return _availableProducts.firstWhere((p) => p.id == id);
   }
 
+  // Removes everything from the cart.
   void clearCart() {
     _productsInCart.clear();
     notifyListeners();
   }
 
+  // Loads the list of available products from the repo.
   void loadProducts() {
     _availableProducts = ProductsRepository.loadProducts(Category.all);
     notifyListeners();
