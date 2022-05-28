@@ -1,16 +1,9 @@
-# cupertino_store
+# flutter_store
 
-A new Flutter project.
+<div>
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="https://user-images.githubusercontent.com/15789820/170830888-c1098c95-6972-4e6b-ac86-b58e408c42e9.jpeg" alt="store" height="500" />
+<img src="https://user-images.githubusercontent.com/15789820/170830968-31afbc20-bad4-465c-abc4-82076f7d7838.jpeg" alt="search" height="500" />
+<img src="https://user-images.githubusercontent.com/15789820/170830974-3894bcd6-d034-4f75-ade1-8814c834cc21.PNG" alt="cart" height="500" />
+  
+</div>
